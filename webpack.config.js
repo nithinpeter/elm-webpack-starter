@@ -2,13 +2,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './bootstrap.js',
+    entry: './src/bootstrap.js',
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: 'bundle.js'
     },
     resolve: {
-        extensions: ['.js', '.elm']
+        extensions: ['.js', '.elm', '.scss']
     },
     module: {
         rules: [{
@@ -18,6 +18,20 @@ module.exports = {
                 loader: 'elm-webpack-loader',
                 options: {}
             }
+        },
+        {
+            test: /\.scss$/,
+            use: [
+                {
+                    loader: "style-loader"
+                },
+                {
+                    loader: "css-loader"
+                },
+                {
+                    loader: "sass-loader"
+                }
+            ]
         }]
     },
     plugins: [
